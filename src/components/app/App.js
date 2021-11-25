@@ -16,7 +16,6 @@ class App extends Component {
         <AppHeader />
         <main>
           <RandomChar />
-          <button onClick={this.toggleRandomChar}>Click me</button>
           <div className="char__content">
             <CharList />
             <CharInfo />

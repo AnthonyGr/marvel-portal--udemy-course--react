@@ -17,10 +17,6 @@ class RandomChar extends Component {
     this.updateChar();
   }
 
-  componentDidUpdate() {}
-
-  componentWillUnmount() {}
-
   marvelService = new MarvelService();
 
   onCharLoaded = (char) => {

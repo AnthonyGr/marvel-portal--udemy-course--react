@@ -39,13 +39,13 @@ const SingleComicPage = () => {
 };
 
 const View = ({ comic }) => {
-  const { name, description, pageCount, thumbnail, language, price } = comic;
+  const { title, description, pageCount, thumbnail, language, price } = comic;
 
   return (
     <div className="single-comic">
-      <img src={thumbnail} alt={name} className="single-comic__img" />
+      <img src={thumbnail} alt={title} className="single-comic__img" />
       <div className="single-comic__info">
-        <h2 className="single-comic__name">{name}</h2>
+        <h2 className="single-comic__name">{title}</h2>
         <p className="single-comic__descr">{description}</p>
         <p className="single-comic__descr">Page count: {pageCount}</p>
         <p className="single-comic__descr">Language: {language}</p>

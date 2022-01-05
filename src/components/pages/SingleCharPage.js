@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+
 import AppBanner from '../appBanner/AppBanner';
 import useMarvelService from '../../services/MarvelService';
 import ErrorMessage from '../errorMessage/ErrorMessage';
@@ -43,6 +45,10 @@ const View = ({ char }) => {
 
   return (
     <div className="single-char">
+      <Helmet>
+        <meta name="description" content={`${char.name} personal page`} />
+        <title>{char.name}</title>
+      </Helmet>
       <img src={thumbnail} alt={name} className="single-char__char-img" />
       <div className="single-char__info">
         <h2 className="single-char__name">{name}</h2>

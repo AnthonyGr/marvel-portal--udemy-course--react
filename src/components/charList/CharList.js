@@ -2,8 +2,26 @@ import { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import useMarvelService from '../../services/MarvelService';
+import Spinner from '../spinner/Spinner';
+import ErrorMessage from '../errorMessage/ErrorMessage';
+import Skeleton from '../skeleton/Skeleton';
 import './charList.scss';
-import setContent from '../../utils/setContent';
+
+const setContent = (process, Component, newItemsLoading) => {
+  switch (process) {
+    case 'waiting':
+      return <Skeleton />;
+    case 'loading':
+      return newItemsLoading ? <Component/> : <Spinner />;
+    case 'confirmed':
+      return <Component/>;
+    case 'error':
+      return <ErrorMessage />;
+    default:
+      throw new Error('Unexpected process state');
+  }
+}
+
 
 const CharList = (props) => {
   const [chars, setChars] = useState([]);
@@ -44,6 +62,8 @@ const CharList = (props) => {
     itemRefs.current.forEach((item) => item.classList.remove('char__item_selected'));
     itemRefs.current[id].classList.add('char__item_selected');
     itemRefs.current[id].focus();
+    console.log( itemRefs.current[id]);
+
   };
 
   const renderItems = (chars) => {
@@ -80,7 +100,7 @@ const CharList = (props) => {
 
   return (
     <div className="char__list">
-      {setContent(process, () => renderItems(chars))}
+      {setContent(process, () => renderItems(chars), newItemsLoading)}
       <button
         className="button button__main button__long"
         disabled={newItemsLoading}
